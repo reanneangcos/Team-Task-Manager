@@ -1,6 +1,6 @@
 :root {
-  color: #172033;
-  background: #eef5ff;
+  color: #1E293B;
+  background: #F8FAFC;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,9 +19,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.72), rgba(230, 245, 255, 0.18)),
-    linear-gradient(145deg, #f8fbff 0%, #e8f4ff 36%, #f5f2ff 68%, #f1fff6 100%);
+  background: #F8FAFC;
   overflow-x: hidden;
 }
 
@@ -31,8 +29,8 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.38) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.26) 1px, transparent 1px);
+    linear-gradient(rgba(226, 232, 240, 0.52) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(226, 232, 240, 0.42) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.26), transparent 72%);
 }
@@ -42,11 +40,11 @@ body::before {
 }
 
 a {
-  color: #007aff;
+  color: #2563EB;
   font-weight: 700;
   text-decoration: none;
 }
 
 a:hover {
-  color: #005ecb;
+  color: #1D4ED8;
 }

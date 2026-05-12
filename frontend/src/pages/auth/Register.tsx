@@ -72,8 +72,7 @@ export default function Register({ user, setUser }: RegisterProps) {
         placeItems: "center",
         px: 2,
         py: 6,
-        background:
-          "linear-gradient(145deg, rgba(248,251,255,0.96), rgba(229,244,255,0.88) 42%, rgba(246,242,255,0.9) 72%, rgba(239,255,247,0.92))",
+        background: "#F8FAFC",
       }}
     >
       <Container maxWidth="sm" sx={{ px: { xs: 0, sm: 3 } }}>
@@ -89,9 +88,8 @@ export default function Register({ user, setUser }: RegisterProps) {
                     placeItems: "center",
                     borderRadius: "8px",
                     color: "white",
-                    background:
-                      "linear-gradient(135deg, rgba(0,122,255,0.98), rgba(52,199,89,0.9))",
-                    boxShadow: "0 16px 34px rgba(0,122,255,0.24)",
+                    background: "linear-gradient(135deg, #2563EB, #38BDF8)",
+                    boxShadow: "0 12px 24px rgba(37, 99, 235, 0.2)",
                   }}
                 >
                   <AssignmentTurnedInIcon />

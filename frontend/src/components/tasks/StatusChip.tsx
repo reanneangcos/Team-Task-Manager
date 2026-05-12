@@ -6,6 +6,14 @@ interface StatusChipProps {
 }
 
 export default function StatusChip({ status }: StatusChipProps) {
+  const statusColors = {
+    pending: "#F59E0B",
+    inProgress: "#3B82F6",
+    completed: "#22C55E",
+    urgent: "#EF4444",
+    archived: "#94A3B8",
+  };
+
   const getLabel = () => {
     if (status === "in_progress") return "In Progress";
     if (status === "completed") return "Completed";
@@ -15,24 +23,24 @@ export default function StatusChip({ status }: StatusChipProps) {
   const getStyle = () => {
     if (status === "completed") {
       return {
-        color: "#0b6b2d",
-        backgroundColor: "rgba(52, 199, 89, 0.16)",
-        borderColor: "rgba(52, 199, 89, 0.34)",
+        color: statusColors.completed,
+        backgroundColor: "#F0FDF4",
+        borderColor: statusColors.completed,
       };
     }
 
     if (status === "in_progress") {
       return {
-        color: "#9a5a00",
-        backgroundColor: "rgba(255, 159, 10, 0.18)",
-        borderColor: "rgba(255, 159, 10, 0.38)",
+        color: statusColors.inProgress,
+        backgroundColor: "#EFF6FF",
+        borderColor: statusColors.inProgress,
       };
     }
 
     return {
-      color: "#526071",
-      backgroundColor: "rgba(142, 142, 147, 0.16)",
-      borderColor: "rgba(142, 142, 147, 0.3)",
+      color: statusColors.pending,
+      backgroundColor: "#FFFBEB",
+      borderColor: statusColors.pending,
     };
   };
 

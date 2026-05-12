@@ -1,30 +1,49 @@
 import { createTheme } from "@mui/material/styles";
 
+const colors = {
+  background: "#F8FAFC",
+  header: "#0F172A",
+  button: "#000000",
+  buttonHover: "#111827",
+  primary: "#2563EB",
+  primaryHover: "#1D4ED8",
+  accent: "#38BDF8",
+  card: "#FFFFFF",
+  border: "#E2E8F0",
+  text: "#1E293B",
+  muted: "#64748B",
+  pending: "#F59E0B",
+  inProgress: "#3B82F6",
+  completed: "#22C55E",
+  urgent: "#EF4444",
+  archived: "#94A3B8",
+};
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#007aff",
-      contrastText: "#ffffff",
+      main: colors.primary,
+      contrastText: colors.card,
     },
     secondary: {
-      main: "#34c759",
+      main: colors.accent,
     },
     success: {
-      main: "#34c759",
+      main: colors.completed,
     },
     warning: {
-      main: "#ff9f0a",
+      main: colors.pending,
     },
     error: {
-      main: "#ff3b30",
+      main: colors.urgent,
     },
     background: {
-      default: "#eef5ff",
-      paper: "rgba(255, 255, 255, 0.72)",
+      default: colors.background,
+      paper: colors.card,
     },
     text: {
-      primary: "#172033",
-      secondary: "#647184",
+      primary: colors.text,
+      secondary: colors.muted,
     },
   },
   shape: {
@@ -61,19 +80,46 @@ const theme = createTheme({
           borderRadius: 999,
           textTransform: "none",
           boxShadow: "none",
-        },
-        contained: {
-          background:
-            "linear-gradient(135deg, rgba(0,122,255,0.98), rgba(48,176,199,0.96))",
-          boxShadow: "0 12px 30px rgba(0, 122, 255, 0.24)",
-          "&:hover": {
-            boxShadow: "0 16px 34px rgba(0, 122, 255, 0.28)",
+          color: colors.button,
+          "&.MuiButton-contained": {
+            color: colors.card,
+            background: colors.button,
+            border: `1px solid ${colors.card}`,
+            boxShadow: "none",
+           
+          },
+          "&.MuiButton-outlined": {
+            color: colors.button,
+            borderColor: colors.button,
+            backgroundColor: colors.card,
+            
+          },
+          "&.MuiButton-text": {
+            color: colors.button,
+           
           },
         },
+        contained: {
+          color: colors.card,
+          background: colors.button,
+          border: `1px solid ${colors.card}`,
+          boxShadow: "none",
+         
+        },
         outlined: {
-          borderColor: "rgba(0, 122, 255, 0.26)",
-          backgroundColor: "rgba(255, 255, 255, 0.5)",
-          backdropFilter: "blur(18px)",
+          color: colors.button,
+          borderColor: colors.button,
+          backgroundColor: colors.card,
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: colors.button,
+          "&.MuiIconButton-colorError": {
+            color: colors.button,
+          },
         },
       },
     },
@@ -81,11 +127,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 8,
-          backgroundColor: "rgba(255, 255, 255, 0.68)",
-          border: "1px solid rgba(255, 255, 255, 0.72)",
-          boxShadow:
-            "0 24px 60px rgba(64, 100, 148, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.82)",
-          backdropFilter: "blur(28px) saturate(170%)",
+          backgroundColor: colors.card,
+          border: `1px solid ${colors.border}`,
+          boxShadow: "0 12px 30px rgba(15, 23, 42, 0.06)",
         },
       },
     },
@@ -103,8 +147,10 @@ const theme = createTheme({
         root: {
           "& .MuiOutlinedInput-root": {
             borderRadius: 8,
-            backgroundColor: "rgba(255, 255, 255, 0.56)",
-            backdropFilter: "blur(18px)",
+            backgroundColor: colors.card,
+            "& fieldset": {
+              borderColor: colors.border,
+            },
           },
         },
       },
@@ -114,7 +160,7 @@ const theme = createTheme({
         root: {
           fontWeight: 800,
           background:
-            "linear-gradient(135deg, rgba(0,122,255,0.94), rgba(52,199,89,0.9))",
+            `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
         },
       },
     },

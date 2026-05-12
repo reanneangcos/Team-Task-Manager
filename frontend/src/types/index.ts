@@ -6,6 +6,8 @@ export interface User {
   email: string;
   role: UserRole;
   avatar_url?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export type TaskStatus = "pending" | "in_progress" | "completed";
@@ -16,6 +18,7 @@ export interface Task {
   description: string;
   status: TaskStatus;
   users?: User[];
+  creator?: User | null;
   created_at?: string;
   updated_at?: string;
 }

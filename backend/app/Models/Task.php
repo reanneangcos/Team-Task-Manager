@@ -13,10 +13,16 @@ class Task extends Model
         'title',
         'description',
         'status',
+        'created_by',
     ];
 
     public function users()
     {
         return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

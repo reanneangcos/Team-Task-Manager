@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/users', [TaskController::class, 'employees']);
         Route::get('/tasks', [TaskController::class, 'index']);
         Route::post('/tasks', [TaskController::class, 'store']);
+        Route::patch('/tasks/{id}', [TaskController::class, 'update']);
     });
 
     Route::middleware('role:employee|admin')->group(function () {

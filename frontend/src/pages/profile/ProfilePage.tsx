@@ -20,6 +20,7 @@ import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 import api from "../../api/axios";
 import type { ProfileResponse, User } from "../../types";
 import { saveAuth } from "../../utils/auth";
+import { getMediaUrl } from "../../utils/media";
 
 interface ProfilePageProps {
   user: User | null;
@@ -80,8 +81,8 @@ export default function ProfilePage({ user, setUser }: ProfilePageProps) {
         sx={{
           p: { xs: 2.25, md: 3 },
           borderRadius: "8px",
-          border: "1px solid rgba(255, 255, 255, 0.72)",
-          backgroundColor: "rgba(255, 255, 255, 0.48)",
+          border: "1px solid #E2E8F0",
+          backgroundColor: "#FFFFFF",
           backdropFilter: "blur(28px) saturate(170%)",
           boxShadow: "0 24px 60px rgba(64, 100, 148, 0.13)",
         }}
@@ -107,12 +108,12 @@ export default function ProfilePage({ user, setUser }: ProfilePageProps) {
                 sx={{ alignItems: { xs: "flex-start", sm: "center" } }}
               >
                 <Avatar
-                  src={user.avatar_url || ""}
+                  src={getMediaUrl(user.avatar_url)}
                   sx={{
                     width: 72,
                     height: 72,
-                    border: "3px solid rgba(255,255,255,0.88)",
-                    boxShadow: "0 16px 34px rgba(0,122,255,0.2)",
+                    border: "3px solid #FFFFFF",
+                    boxShadow: "0 12px 24px rgba(37, 99, 235, 0.18)",
                   }}
                 >
                   {user.name.charAt(0).toUpperCase()}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import {
   Alert,
+  Avatar,
   Box,
   Button,
   Card,
@@ -23,6 +24,7 @@ import api from "../../api/axios";
 import type { Task, User } from "../../types";
 import LoadingScreen from "../../components/common/LoadingScreen";
 import TaskCard from "../../components/tasks/TaskCard";
+import { getMediaUrl } from "../../utils/media";
 
 export default function AdminDashboard() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -105,8 +107,8 @@ export default function AdminDashboard() {
         sx={{
           p: { xs: 2.25, md: 3 },
           borderRadius: "8px",
-          border: "1px solid rgba(255, 255, 255, 0.72)",
-          backgroundColor: "rgba(255, 255, 255, 0.48)",
+          border: "1px solid #E2E8F0",
+          backgroundColor: "#FFFFFF",
           backdropFilter: "blur(28px) saturate(170%)",
           boxShadow: "0 24px 60px rgba(64, 100, 148, 0.13)",
         }}
@@ -139,8 +141,8 @@ export default function AdminDashboard() {
                   px: 1.5,
                   py: 1,
                   borderRadius: "8px",
-                  border: "1px solid rgba(255,255,255,0.72)",
-                  backgroundColor: "rgba(255,255,255,0.5)",
+                  border: "1px solid #E2E8F0",
+                  backgroundColor: "#F8FAFC",
                 }}
               >
                 <Typography variant="caption" sx={{ color: "text.secondary" }}>
@@ -226,21 +228,38 @@ export default function AdminDashboard() {
                           checked={selectedUserIds.includes(employee.id)}
                           onChange={() => toggleEmployee(employee.id)}
                           sx={{
-                            color: "rgba(0,122,255,0.46)",
+                            color: "#94A3B8",
                             "&.Mui-checked": { color: "primary.main" },
                           }}
                         />
                       }
-                      label={employee.name}
+                      label={
+                        <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+                          <Avatar
+                            src={getMediaUrl(employee.avatar_url)}
+                            sx={{
+                              width: 28,
+                              height: 28,
+                              fontSize: 13,
+                              fontWeight: 800,
+                            }}
+                          >
+                            {employee.name.charAt(0).toUpperCase()}
+                          </Avatar>
+                          <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                            {employee.name}
+                          </Typography>
+                        </Stack>
+                      }
                       sx={{
                         m: 0,
                         px: 1,
                         py: 0.25,
                         borderRadius: "999px",
                         backgroundColor: selectedUserIds.includes(employee.id)
-                          ? "rgba(0,122,255,0.12)"
-                          : "rgba(255,255,255,0.42)",
-                        border: "1px solid rgba(255,255,255,0.62)",
+                          ? "#EFF6FF"
+                          : "#FFFFFF",
+                        border: "1px solid #E2E8F0",
                       }}
                     />
                   ))}

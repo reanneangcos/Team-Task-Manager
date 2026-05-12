@@ -25,6 +25,11 @@ class User extends Authenticatable implements HasMedia
         'remember_token',
     ];
 
+    protected $appends = [
+        'avatar_url',
+        'role',
+    ];
+
     protected function casts(): array
     {
         return [
@@ -38,8 +43,21 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(Task::class)->withTimestamps();
     }
 
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('avatar')
+            ->singleFile()
+            ->useDisk('public');
+    }
+
     public function getAvatarUrlAttribute()
     {
         return $this->getFirstMediaUrl('avatar');
+    }
+
+    public function getRoleAttribute()
+    {
+        return $this->getRoleNames()->first();
     }
 }

@@ -4,7 +4,9 @@ import { CssBaseline } from "@mui/material";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import EmployeeDashboard from "./pages/employee/EmployeeDashboard";
+import AdminEmployeesPage from "./pages/admin/AdminEmployeesPage";
+import AdminTasksPage from "./pages/admin/AdminTasksPage";
+import EmployeeTasksPage from "./pages/employee/EmployeeTasksPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import AppLayout from "./components/layout/AppLayout";
@@ -14,7 +16,7 @@ import type { User } from "./types";
 export default function App() {
   const [user, setUser] = useState<User | null>(() => getStoredUser());
 
-  const homePath = user?.role === "admin" ? "/admin" : "/employee";
+  const homePath = user?.role === "admin" ? "/admin" : "/employee/tasks";
 
   return (
     <>
@@ -36,11 +38,38 @@ export default function App() {
         />
 
         <Route
+          path="/admin/employees"
+          element={
+            <ProtectedRoute user={user} allowedRoles={["admin"]}>
+              <AppLayout user={user} setUser={setUser}>
+                <AdminEmployeesPage />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/tasks"
+          element={
+            <ProtectedRoute user={user} allowedRoles={["admin"]}>
+              <AppLayout user={user} setUser={setUser}>
+                <AdminTasksPage />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/employee"
+          element={<Navigate to="/employee/tasks" replace />}
+        />
+
+        <Route
+          path="/employee/tasks"
           element={
             <ProtectedRoute user={user} allowedRoles={["employee", "admin"]}>
               <AppLayout user={user} setUser={setUser}>
-                <EmployeeDashboard user={user} />
+                <EmployeeTasksPage user={user} />
               </AppLayout>
             </ProtectedRoute>
           }

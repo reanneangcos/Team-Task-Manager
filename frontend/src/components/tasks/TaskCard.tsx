@@ -10,8 +10,10 @@ import {
 } from "@mui/material";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import ManageAccountsRoundedIcon from "@mui/icons-material/ManageAccountsRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import type { Task, TaskStatus } from "../../types";
+import { getMediaUrl } from "../../utils/media";
 import StatusChip from "./StatusChip";
 
 interface TaskCardProps {
@@ -26,6 +28,7 @@ export default function TaskCard({
   onStatusChange,
 }: TaskCardProps) {
   const assignedUsers = task.users ?? [];
+  const creator = task.creator;
 
   return (
     <Card
@@ -42,15 +45,15 @@ export default function TaskCard({
           height: 3,
           background:
             task.status === "completed"
-              ? "linear-gradient(90deg, #34c759, #30d158)"
+              ? "#22C55E"
               : task.status === "in_progress"
-                ? "linear-gradient(90deg, #ff9f0a, #ffd60a)"
-                : "linear-gradient(90deg, #8e8e93, #64d2ff)",
+                ? "#3B82F6"
+                : "#F59E0B",
         },
         "&:hover": {
           transform: "translateY(-2px)",
           boxShadow:
-            "0 28px 64px rgba(64, 100, 148, 0.22), inset 0 1px 0 rgba(255,255,255,0.84)",
+            "0 16px 36px rgba(15, 23, 42, 0.1)",
         },
       }}
     >
@@ -77,13 +80,33 @@ export default function TaskCard({
             {task.description}
           </Typography>
 
+          {creator && (
+            <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+              <ManageAccountsRoundedIcon sx={{ color: "primary.main", fontSize: 18 }} />
+              <Avatar
+                src={getMediaUrl(creator.avatar_url)}
+                sx={{ width: 30, height: 30, fontSize: 13, fontWeight: 800 }}
+              >
+                {creator.name.charAt(0).toUpperCase()}
+              </Avatar>
+              <Box>
+                <Typography variant="caption" sx={{ color: "text.secondary", lineHeight: 1 }}>
+                  Created by
+                </Typography>
+                <Typography variant="body2" sx={{ fontWeight: 780, lineHeight: 1.2 }}>
+                  {creator.name}
+                </Typography>
+              </Box>
+            </Stack>
+          )}
+
           {showAssignees && assignedUsers.length > 0 && (
             <Box
               sx={{
                 p: 1.5,
                 borderRadius: "8px",
-                border: "1px solid rgba(255,255,255,0.72)",
-                backgroundColor: "rgba(255,255,255,0.42)",
+                border: "1px solid #E2E8F0",
+                backgroundColor: "#F8FAFC",
               }}
             >
               <Stack
@@ -105,12 +128,12 @@ export default function TaskCard({
                       width: 32,
                       height: 32,
                       fontSize: 14,
-                      border: "2px solid rgba(255,255,255,0.82)",
+                      border: "2px solid #FFFFFF",
                     },
                   }}
                 >
                   {assignedUsers.map((user) => (
-                    <Avatar key={user.id} src={user.avatar_url || ""}>
+                    <Avatar key={user.id} src={getMediaUrl(user.avatar_url)}>
                       {user.name.charAt(0).toUpperCase()}
                     </Avatar>
                   ))}
@@ -136,7 +159,6 @@ export default function TaskCard({
 
               <Button
                 variant="contained"
-                color="success"
                 startIcon={<CheckCircleRoundedIcon />}
                 disabled={task.status === "completed"}
                 onClick={() => onStatusChange(task.id, "completed")}
