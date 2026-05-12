@@ -1,6 +1,6 @@
 :root {
-  color: #1E293B;
-  background: #F8FAFC;
+  color: #1D1D1F;
+  background: #F5F5F7;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,7 +19,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: #F8FAFC;
+  background: #F5F5F7;
   overflow-x: hidden;
 }
 
@@ -28,11 +28,8 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(rgba(226, 232, 240, 0.52) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(226, 232, 240, 0.42) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.26), transparent 72%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0));
+  opacity: 0.9;
 }
 
 #root {
@@ -40,11 +37,11 @@ body::before {
 }
 
 a {
-  color: #2563EB;
+  color: #111111;
   font-weight: 700;
   text-decoration: none;
 }
 
 a:hover {
-  color: #1D4ED8;
+  color: #000000;
 }

@@ -72,11 +72,17 @@ export default function Register({ user, setUser }: RegisterProps) {
         placeItems: "center",
         px: 2,
         py: 6,
-        background: "#F8FAFC",
+        backgroundColor: "#F5F5F7",
       }}
     >
       <Container maxWidth="sm" sx={{ px: { xs: 0, sm: 3 } }}>
-        <Card elevation={0}>
+        <Card
+          elevation={0}
+          sx={{
+            backgroundColor: "rgba(255, 255, 255, 0.9)",
+            backdropFilter: "blur(24px) saturate(160%)",
+          }}
+        >
           <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
             <Stack spacing={3}>
               <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
@@ -87,9 +93,9 @@ export default function Register({ user, setUser }: RegisterProps) {
                     display: "grid",
                     placeItems: "center",
                     borderRadius: "8px",
-                    color: "white",
-                    background: "linear-gradient(135deg, #2563EB, #38BDF8)",
-                    boxShadow: "0 12px 24px rgba(37, 99, 235, 0.2)",
+                    color: "#FFFFFF",
+                    background: "#000000",
+                    boxShadow: "0 12px 24px rgba(0, 0, 0, 0.18)",
                   }}
                 >
                   <AssignmentTurnedInIcon />

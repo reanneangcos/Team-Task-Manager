@@ -18,6 +18,7 @@ class ProfileController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'role' => $user->getRoleNames()->first(),
+            'is_active' => $user->is_active,
             'avatar_url' => $user->avatar_url,
         ]);
     }
@@ -68,6 +69,7 @@ class ProfileController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'role' => $user->getRoleNames()->first(),
+                'is_active' => $user->is_active,
                 'avatar_url' => $user->avatar_url,
             ],
         ]);

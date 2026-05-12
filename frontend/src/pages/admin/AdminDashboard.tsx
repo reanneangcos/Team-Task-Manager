@@ -8,8 +8,8 @@ import {
   Card,
   CardContent,
   Checkbox,
+  Chip,
   FormControlLabel,
-  Grid,
   InputAdornment,
   Stack,
   TextField,
@@ -23,7 +23,6 @@ import TitleRoundedIcon from "@mui/icons-material/TitleRounded";
 import api from "../../api/axios";
 import type { Task, User } from "../../types";
 import LoadingScreen from "../../components/common/LoadingScreen";
-import TaskCard from "../../components/tasks/TaskCard";
 import { getMediaUrl } from "../../utils/media";
 
 export default function AdminDashboard() {
@@ -107,10 +106,10 @@ export default function AdminDashboard() {
         sx={{
           p: { xs: 2.25, md: 3 },
           borderRadius: "8px",
-          border: "1px solid #E2E8F0",
+          border: "1px solid #D2D2D7",
           backgroundColor: "#FFFFFF",
           backdropFilter: "blur(28px) saturate(170%)",
-          boxShadow: "0 24px 60px rgba(64, 100, 148, 0.13)",
+          boxShadow: "0 24px 60px rgba(0, 0, 0, 0.08)",
         }}
       >
         <Stack
@@ -141,8 +140,8 @@ export default function AdminDashboard() {
                   px: 1.5,
                   py: 1,
                   borderRadius: "8px",
-                  border: "1px solid #E2E8F0",
-                  backgroundColor: "#F8FAFC",
+                  border: "1px solid #D2D2D7",
+                  backgroundColor: "#F5F5F7",
                 }}
               >
                 <Typography variant="caption" sx={{ color: "text.secondary" }}>
@@ -226,9 +225,10 @@ export default function AdminDashboard() {
                       control={
                         <Checkbox
                           checked={selectedUserIds.includes(employee.id)}
+                          disabled={employee.is_active === false}
                           onChange={() => toggleEmployee(employee.id)}
                           sx={{
-                            color: "#94A3B8",
+                            color: "#8E8E93",
                             "&.Mui-checked": { color: "primary.main" },
                           }}
                         />
@@ -249,6 +249,19 @@ export default function AdminDashboard() {
                           <Typography variant="body2" sx={{ fontWeight: 700 }}>
                             {employee.name}
                           </Typography>
+                          {employee.is_active === false && (
+                            <Chip
+                              size="small"
+                              label="Inactive"
+                              variant="outlined"
+                              sx={{
+                                height: 22,
+                                color: "#991B1B",
+                                borderColor: "#EF4444",
+                                backgroundColor: "#FEF2F2",
+                              }}
+                            />
+                          )}
                         </Stack>
                       }
                       sx={{
@@ -257,9 +270,12 @@ export default function AdminDashboard() {
                         py: 0.25,
                         borderRadius: "999px",
                         backgroundColor: selectedUserIds.includes(employee.id)
-                          ? "#EFF6FF"
+                          ? "#F2F2F7"
+                          : employee.is_active === false
+                            ? "#F5F5F7"
                           : "#FFFFFF",
-                        border: "1px solid #E2E8F0",
+                        border: "1px solid #D2D2D7",
+                        opacity: employee.is_active === false ? 0.72 : 1,
                       }}
                     />
                   ))}
@@ -273,14 +289,6 @@ export default function AdminDashboard() {
           </Box>
         </CardContent>
       </Card>
-
-      <Grid container spacing={2}>
-        {tasks.map((task) => (
-          <Grid key={task.id} size={{ xs: 12, md: 6 }}>
-            <TaskCard task={task} />
-          </Grid>
-        ))}
-      </Grid>
 
       {tasks.length === 0 && (
         <Typography sx={{ color: "text.secondary" }}>

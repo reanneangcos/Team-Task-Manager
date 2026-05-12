@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { isAxiosError } from "axios";
 import api from "../../api/axios";
 import type { AuthResponse, User } from "../../types";
 import { saveAuth } from "../../utils/auth";
@@ -45,25 +46,51 @@ export default function Login({ user, setUser }: LoginProps) {
       saveAuth(response.data.token, response.data.user);
       setUser(response.data.user);
 
-      navigate(response.data.user.role === "admin" ? "/admin" : "/employee");
-    } catch {
+      navigate(response.data.user.role === "admin" ? "/admin" : "/employee/tasks");
+    } catch (loginError) {
+      if (isAxiosError<{ errors?: Record<string, string[]>; message?: string }>(loginError)) {
+        const apiMessage =
+          loginError.response?.data.errors?.email?.[0] ??
+          loginError.response?.data.message;
+
+        setError(apiMessage ?? "Login failed. Please check your email and password.");
+        return;
+      }
+
       setError("Login failed. Please check your email and password.");
     }
   };
 
   if (user) {
     return (
-      <Navigate to={user.role === "admin" ? "/admin" : "/employee"} replace />
+      <Navigate to={user.role === "admin" ? "/admin" : "/employee/tasks"} replace />
     );
   }
 
   return (
-    <Container maxWidth="sm" sx={{ py: 8 }}>
-      <Card elevation={0} sx={{ border: "1px solid #E2E8F0", mt: "200px" }}>
-        <CardContent sx={{ p: 4 }}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "grid",
+        placeItems: "center",
+        px: 2,
+        py: 6,
+        backgroundColor: "#F5F5F7",
+      }}
+    >
+      <Container maxWidth="sm" sx={{ px: { xs: 0, sm: 3 } }}>
+        <Card
+          elevation={0}
+          sx={{
+            border: "1px solid #D2D2D7",
+            backgroundColor: "rgba(255, 255, 255, 0.9)",
+            backdropFilter: "blur(24px) saturate(160%)",
+          }}
+        >
+          <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
           <Stack spacing={3}>
             <Box sx={{ textAlign: "center" }}>
-              <Typography sx={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+              <Typography sx={{ fontSize: "1.7rem", fontWeight: 900 }}>
                 Welcome back
               </Typography>
               <Typography color="text.secondary">
@@ -107,5 +134,6 @@ export default function Login({ user, setUser }: LoginProps) {
         </CardContent>
       </Card>
     </Container>
+    </Box>
   );
 }

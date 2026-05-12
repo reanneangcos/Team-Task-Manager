@@ -175,9 +175,9 @@ export default function AdminTasksPage() {
         sx={{
           p: { xs: 2.25, md: 3 },
           borderRadius: "8px",
-          border: "1px solid #E2E8F0",
+          border: "1px solid #D2D2D7",
           backgroundColor: "#FFFFFF",
-          boxShadow: "0 24px 60px rgba(64, 100, 148, 0.13)",
+          boxShadow: "0 24px 60px rgba(0, 0, 0, 0.08)",
         }}
       >
         <Stack
@@ -222,8 +222,8 @@ export default function AdminTasksPage() {
                         justifyContent: "flex-start",
                         p: 1.25,
                         borderRadius: "8px",
-                        border: selected ? "1px solid #2563EB" : "1px solid #E2E8F0",
-                        backgroundColor: selected ? "#EFF6FF" : "#FFFFFF",
+                        border: selected ? "1px solid #111111" : "1px solid #D2D2D7",
+                        backgroundColor: selected ? "#F2F2F7" : "#FFFFFF",
                         textAlign: "left",
                       }}
                     >
@@ -239,7 +239,7 @@ export default function AdminTasksPage() {
                           </Box>
                           <StatusChip status={task.status} />
                         </Stack>
-                        <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
+                        <Typography variant="body2" sx={{ color: "#1D1D1F", fontWeight: 500 }} noWrap>
                           {task.description}
                         </Typography>
                       </Stack>
@@ -330,9 +330,13 @@ export default function AdminTasksPage() {
                             control={
                               <Checkbox
                                 checked={form.userIds.includes(employee.id)}
+                                disabled={
+                                  employee.is_active === false &&
+                                  !form.userIds.includes(employee.id)
+                                }
                                 onChange={() => toggleEmployee(employee.id)}
                                 sx={{
-                                  color: "#94A3B8",
+                                  color: "#8E8E93",
                                   "&.Mui-checked": { color: "primary.main" },
                                 }}
                               />
@@ -348,6 +352,19 @@ export default function AdminTasksPage() {
                                 <Typography variant="body2" sx={{ fontWeight: 700 }}>
                                   {employee.name}
                                 </Typography>
+                                {employee.is_active === false && (
+                                  <Chip
+                                    size="small"
+                                    label="Inactive"
+                                    variant="outlined"
+                                    sx={{
+                                      height: 22,
+                                      color: "#991B1B",
+                                      borderColor: "#EF4444",
+                                      backgroundColor: "#FEF2F2",
+                                    }}
+                                  />
+                                )}
                               </Stack>
                             }
                             sx={{
@@ -356,9 +373,16 @@ export default function AdminTasksPage() {
                               py: 0.25,
                               borderRadius: "999px",
                               backgroundColor: form.userIds.includes(employee.id)
-                                ? "#EFF6FF"
+                                ? "#F2F2F7"
+                                : employee.is_active === false
+                                  ? "#F5F5F7"
                                 : "#FFFFFF",
-                              border: "1px solid #E2E8F0",
+                              border: "1px solid #D2D2D7",
+                              opacity:
+                                employee.is_active === false &&
+                                !form.userIds.includes(employee.id)
+                                  ? 0.72
+                                  : 1,
                             }}
                           />
                         ))}

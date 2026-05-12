@@ -8,10 +8,10 @@ interface StatusChipProps {
 export default function StatusChip({ status }: StatusChipProps) {
   const statusColors = {
     pending: "#F59E0B",
-    inProgress: "#3B82F6",
+    inProgress: "#111111",
     completed: "#22C55E",
     urgent: "#EF4444",
-    archived: "#94A3B8",
+    archived: "#8E8E93",
   };
 
   const getLabel = () => {
@@ -32,7 +32,7 @@ export default function StatusChip({ status }: StatusChipProps) {
     if (status === "in_progress") {
       return {
         color: statusColors.inProgress,
-        backgroundColor: "#EFF6FF",
+        backgroundColor: "#F2F2F7",
         borderColor: statusColors.inProgress,
       };
     }

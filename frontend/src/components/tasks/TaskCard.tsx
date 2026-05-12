@@ -47,13 +47,13 @@ export default function TaskCard({
             task.status === "completed"
               ? "#22C55E"
               : task.status === "in_progress"
-                ? "#3B82F6"
+                ? "#111111"
                 : "#F59E0B",
         },
         "&:hover": {
           transform: "translateY(-2px)",
           boxShadow:
-            "0 16px 36px rgba(15, 23, 42, 0.1)",
+            "0 16px 36px rgba(0, 0, 0, 0.1)",
         },
       }}
     >
@@ -76,7 +76,7 @@ export default function TaskCard({
             <StatusChip status={task.status} />
           </Stack>
 
-          <Typography sx={{ color: "text.secondary", lineHeight: 1.65 }}>
+          <Typography sx={{ color: "#1D1D1F", fontWeight: 500, lineHeight: 1.65 }}>
             {task.description}
           </Typography>
 
@@ -105,8 +105,8 @@ export default function TaskCard({
               sx={{
                 p: 1.5,
                 borderRadius: "8px",
-                border: "1px solid #E2E8F0",
-                backgroundColor: "#F8FAFC",
+                border: "1px solid #D2D2D7",
+                backgroundColor: "#F5F5F7",
               }}
             >
               <Stack

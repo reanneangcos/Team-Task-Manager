@@ -104,9 +104,9 @@ export default function EmployeeTasksPage({ user }: EmployeeTasksPageProps) {
         sx={{
           p: { xs: 2.25, md: 3 },
           borderRadius: "8px",
-          border: "1px solid #E2E8F0",
+          border: "1px solid #D2D2D7",
           backgroundColor: "#FFFFFF",
-          boxShadow: "0 24px 60px rgba(64, 100, 148, 0.13)",
+          boxShadow: "0 24px 60px rgba(0, 0, 0, 0.08)",
         }}
       >
         <Stack
@@ -137,8 +137,8 @@ export default function EmployeeTasksPage({ user }: EmployeeTasksPageProps) {
                   px: 1.5,
                   py: 1,
                   borderRadius: "8px",
-                  border: "1px solid #E2E8F0",
-                  backgroundColor: "#F8FAFC",
+                  border: "1px solid #D2D2D7",
+                  backgroundColor: "#F5F5F7",
                 }}
               >
                 <Typography variant="caption" sx={{ color: "text.secondary" }}>
@@ -167,7 +167,7 @@ export default function EmployeeTasksPage({ user }: EmployeeTasksPageProps) {
               expanded={expandedTaskId === task.id}
               onChange={(_, expanded) => setExpandedTaskId(expanded ? task.id : false)}
               sx={{
-                border: "1px solid #E2E8F0",
+                border: "1px solid #D2D2D7",
                 borderRadius: "8px",
                 boxShadow: "none",
                 overflow: "hidden",
@@ -199,7 +199,7 @@ export default function EmployeeTasksPage({ user }: EmployeeTasksPageProps) {
 
               <AccordionDetails>
                 <Stack spacing={2.25}>
-                  <Typography sx={{ color: "text.secondary", lineHeight: 1.7 }}>
+                  <Typography sx={{ color: "#1D1D1F", fontWeight: 500, lineHeight: 1.7 }}>
                     {task.description}
                   </Typography>
 
@@ -233,8 +233,8 @@ export default function EmployeeTasksPage({ user }: EmployeeTasksPageProps) {
                       sx={{
                         p: 1.5,
                         borderRadius: "8px",
-                        border: "1px solid #E2E8F0",
-                        backgroundColor: "#F8FAFC",
+                        border: "1px solid #D2D2D7",
+                        backgroundColor: "#F5F5F7",
                       }}
                     >
                       <Stack

@@ -12,10 +12,10 @@ class TaskController extends Controller
     {
         return [
             'creator' => fn ($query) => $query
-                ->select('users.id', 'name', 'email')
+                ->select('users.id', 'name', 'email', 'is_active')
                 ->with('media'),
             'users' => fn ($query) => $query
-                ->select('users.id', 'name', 'email')
+                ->select('users.id', 'name', 'email', 'is_active')
                 ->with('media'),
         ];
     }
@@ -24,10 +24,36 @@ class TaskController extends Controller
     {
         $employees = User::role('employee')
             ->with('media')
-            ->select('id', 'name', 'email', 'created_at')
+            ->select('id', 'name', 'email', 'is_active', 'created_at')
             ->get();
 
         return response()->json($employees);
+    }
+
+    public function updateEmployeeStatus(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'is_active' => 'required|boolean',
+        ]);
+
+        $employee = User::role('employee')->findOrFail($id);
+
+        $employee->update([
+            'is_active' => $validated['is_active'],
+        ]);
+
+        if (! $employee->is_active) {
+            $employee->tokens()->delete();
+        }
+
+        $employee->load('media');
+
+        return response()->json([
+            'message' => $employee->is_active
+                ? 'Employee account enabled'
+                : 'Employee account disabled',
+            'user' => $employee,
+        ]);
     }
 
     public function index()
@@ -92,8 +118,12 @@ class TaskController extends Controller
         ]);
     }
 
-    public function myTasks($userId)
+    public function myTasks(Request $request, $userId)
     {
+        if (! $request->user()->hasRole('admin') && (int) $userId !== $request->user()->id) {
+            abort(403, 'You can only view your own tasks.');
+        }
+
         $user = User::with([
             'tasks' => fn ($query) => $query->with($this->taskRelations()),
         ])->findOrFail($userId);
@@ -108,6 +138,13 @@ class TaskController extends Controller
         ]);
 
         $task = Task::findOrFail($id);
+
+        if (
+            ! $request->user()->hasRole('admin') &&
+            ! $task->users()->where('users.id', $request->user()->id)->exists()
+        ) {
+            abort(403, 'You can only update tasks assigned to you.');
+        }
 
         $task->update([
             'status' => $validated['status'],

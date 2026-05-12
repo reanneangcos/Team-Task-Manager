@@ -68,10 +68,10 @@ export default function EmployeeDashboard({ user }: EmployeeDashboardProps) {
         sx={{
           p: { xs: 2.25, md: 3 },
           borderRadius: "8px",
-          border: "1px solid #E2E8F0",
+          border: "1px solid #D2D2D7",
           backgroundColor: "#FFFFFF",
           backdropFilter: "blur(28px) saturate(170%)",
-          boxShadow: "0 24px 60px rgba(64, 100, 148, 0.13)",
+          boxShadow: "0 24px 60px rgba(0, 0, 0, 0.08)",
         }}
       >
         <Stack
@@ -101,8 +101,8 @@ export default function EmployeeDashboard({ user }: EmployeeDashboardProps) {
                   px: 1.5,
                   py: 1,
                   borderRadius: "8px",
-                  border: "1px solid #E2E8F0",
-                  backgroundColor: "#F8FAFC",
+                  border: "1px solid #D2D2D7",
+                  backgroundColor: "#F5F5F7",
                 }}
               >
                 <Typography variant="caption" sx={{ color: "text.secondary" }}>

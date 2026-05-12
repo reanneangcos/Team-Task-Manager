@@ -21,6 +21,7 @@ class AuthController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'is_active' => true,
         ]);
 
         $user->assignRole('employee');
@@ -34,6 +35,7 @@ class AuthController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'role' => $user->getRoleNames()->first(),
+                'is_active' => $user->is_active,
                 'avatar_url' => $user->avatar_url,
             ],
             'token' => $token,
@@ -55,6 +57,12 @@ class AuthController extends Controller
             ]);
         }
 
+        if (! $user->is_active) {
+            throw ValidationException::withMessages([
+                'email' => ['Your account has been disabled. Please contact the Administrator.'],
+            ]);
+        }
+
         $user->tokens()->delete();
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -66,6 +74,7 @@ class AuthController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'role' => $user->getRoleNames()->first(),
+                'is_active' => $user->is_active,
                 'avatar_url' => $user->avatar_url,
             ],
             'token' => $token,

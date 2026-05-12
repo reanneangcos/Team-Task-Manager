@@ -81,10 +81,10 @@ export default function ProfilePage({ user, setUser }: ProfilePageProps) {
         sx={{
           p: { xs: 2.25, md: 3 },
           borderRadius: "8px",
-          border: "1px solid #E2E8F0",
+          border: "1px solid #D2D2D7",
           backgroundColor: "#FFFFFF",
           backdropFilter: "blur(28px) saturate(170%)",
-          boxShadow: "0 24px 60px rgba(64, 100, 148, 0.13)",
+          boxShadow: "0 24px 60px rgba(0, 0, 0, 0.08)",
         }}
       >
         <Typography variant="h4" sx={{ fontWeight: 900 }}>
@@ -113,7 +113,7 @@ export default function ProfilePage({ user, setUser }: ProfilePageProps) {
                     width: 72,
                     height: 72,
                     border: "3px solid #FFFFFF",
-                    boxShadow: "0 12px 24px rgba(37, 99, 235, 0.18)",
+                    boxShadow: "0 12px 24px rgba(0, 0, 0, 0.14)",
                   }}
                 >
                   {user.name.charAt(0).toUpperCase()}

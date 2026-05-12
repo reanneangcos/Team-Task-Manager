@@ -1,22 +1,24 @@
 import { createTheme } from "@mui/material/styles";
 
 const colors = {
-  background: "#F8FAFC",
-  header: "#0F172A",
+  background: "#F5F5F7",
+  surface: "#FFFFFF",
+  panel: "#F2F2F7",
+  header: "#050505",
   button: "#000000",
-  buttonHover: "#111827",
-  primary: "#2563EB",
-  primaryHover: "#1D4ED8",
-  accent: "#38BDF8",
+  buttonHover: "#1D1D1F",
+  primary: "#111111",
+  primaryHover: "#000000",
+  accent: "#6E6E73",
   card: "#FFFFFF",
-  border: "#E2E8F0",
-  text: "#1E293B",
-  muted: "#64748B",
+  border: "#D2D2D7",
+  text: "#1D1D1F",
+  muted: "#6E6E73",
   pending: "#F59E0B",
-  inProgress: "#3B82F6",
+  inProgress: "#111111",
   completed: "#22C55E",
   urgent: "#EF4444",
-  archived: "#94A3B8",
+  archived: "#8E8E93",
 };
 
 const theme = createTheme({
@@ -84,32 +86,49 @@ const theme = createTheme({
           "&.MuiButton-contained": {
             color: colors.card,
             background: colors.button,
-            border: `1px solid ${colors.card}`,
-            boxShadow: "none",
-           
+            border: `1px solid ${colors.button}`,
+            boxShadow: "0 10px 24px rgba(0, 0, 0, 0.12)",
+            "&:hover": {
+              background: colors.buttonHover,
+              boxShadow: "0 12px 28px rgba(0, 0, 0, 0.18)",
+            },
           },
           "&.MuiButton-outlined": {
             color: colors.button,
             borderColor: colors.button,
-            backgroundColor: colors.card,
-            
+            backgroundColor: "rgba(255, 255, 255, 0.72)",
+            "&:hover": {
+              borderColor: colors.button,
+              backgroundColor: colors.panel,
+            },
           },
           "&.MuiButton-text": {
             color: colors.button,
-           
+            "&:hover": {
+              backgroundColor: colors.panel,
+            },
           },
         },
         contained: {
           color: colors.card,
           background: colors.button,
-          border: `1px solid ${colors.card}`,
-          boxShadow: "none",
-         
+          border: `1px solid ${colors.button}`,
+          boxShadow: "0 10px 24px rgba(0, 0, 0, 0.12)",
         },
         outlined: {
           color: colors.button,
           borderColor: colors.button,
-          backgroundColor: colors.card,
+          backgroundColor: "rgba(255, 255, 255, 0.72)",
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: colors.archived,
+          "&.Mui-checked": {
+            color: colors.primary,
+          },
         },
       },
     },
@@ -127,9 +146,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 8,
-          backgroundColor: colors.card,
+          backgroundColor: "rgba(255, 255, 255, 0.88)",
           border: `1px solid ${colors.border}`,
-          boxShadow: "0 12px 30px rgba(15, 23, 42, 0.06)",
+          boxShadow: "0 18px 50px rgba(0, 0, 0, 0.07)",
+          backdropFilter: "blur(24px) saturate(160%)",
         },
       },
     },
@@ -147,11 +167,56 @@ const theme = createTheme({
         root: {
           "& .MuiOutlinedInput-root": {
             borderRadius: 8,
-            backgroundColor: colors.card,
+            backgroundColor: "rgba(255, 255, 255, 0.9)",
             "& fieldset": {
               borderColor: colors.border,
             },
+            "&:hover fieldset": {
+              borderColor: colors.primary,
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: colors.primary,
+              borderWidth: 1,
+            },
           },
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 8,
+            backgroundColor: "rgba(255, 255, 255, 0.9)",
+          },
+        },
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          borderColor: colors.border,
+          backdropFilter: "blur(22px) saturate(160%)",
+        },
+      },
+    },
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          border: `1px solid ${colors.border}`,
+          backgroundColor: "rgba(255, 255, 255, 0.92)",
+          color: colors.text,
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: 8,
+          backgroundColor: "rgba(255, 255, 255, 0.96)",
+          backdropFilter: "blur(24px) saturate(160%)",
         },
       },
     },
@@ -159,8 +224,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontWeight: 800,
-          background:
-            `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
+          background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
         },
       },
     },

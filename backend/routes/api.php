@@ -18,18 +18,20 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json([
             'id' => $user->id,
             'name' => $user->name,
-            'email' => $user->email,
-            'role' => $user->getRoleNames()->first(),
-            'avatar_url' => $user->avatar_url,
-        ]);
+                'email' => $user->email,
+                'role' => $user->getRoleNames()->first(),
+                'is_active' => $user->is_active,
+                'avatar_url' => $user->avatar_url,
+            ]);
     });
 
     Route::get('/profile/{id}', [ProfileController::class, 'show']);
     Route::patch('/profile/{id}', [ProfileController::class, 'update']);
 
-    Route::middleware('role:admin')->group(function () {
-        Route::get('/users', [TaskController::class, 'employees']);
-        Route::get('/tasks', [TaskController::class, 'index']);
+        Route::middleware('role:admin')->group(function () {
+            Route::get('/users', [TaskController::class, 'employees']);
+            Route::patch('/users/{id}/status', [TaskController::class, 'updateEmployeeStatus']);
+            Route::get('/tasks', [TaskController::class, 'index']);
         Route::post('/tasks', [TaskController::class, 'store']);
         Route::patch('/tasks/{id}', [TaskController::class, 'update']);
     });
